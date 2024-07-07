@@ -1,0 +1,83 @@
+// script.js
+
+// Example: Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+// Function to open the login popup
+function openLoginPopup() {
+    var loginPopup = document.getElementById('loginPopup');
+    loginPopup.style.display = 'flex';
+}
+
+// Function to close the login popup
+function closeLoginPopup() {
+    var loginPopup = document.getElementById('loginPopup');
+    loginPopup.style.display = 'none';
+}
+
+// Function to send OTP to the entered mobile number
+function sendOTP() {
+    var mobileNumber = document.getElementById('mobileNumber').value;
+    
+    // Replace with your OTP generation and sending logic (e.g., API call)
+    // For demonstration, showing an alert with OTP
+    var OTP = Math.floor(100000 + Math.random() * 900000); // Generate a random 6-digit OTP
+    alert('OTP sent to ' + mobileNumber + ': ' + OTP); // Replace with actual sending mechanism
+    
+    // Optionally, you can automatically fill the OTP field for testing/demo purposes
+    document.getElementById('otp').value = OTP;
+}
+
+// Function to verify the entered OTP
+function verifyOTP() {
+    var enteredOTP = document.getElementById('otp').value;
+    
+    // Replace with your OTP verification logic (e.g., API call)
+    // For demonstration, simply checking if entered OTP matches the generated OTP
+    var OTP = document.getElementById('otp').value;
+    if (enteredOTP === OTP) {
+        alert('OTP verified successfully. Logging in...');
+        notifyLogin(9326487146); // Notify backend or handle login success
+        
+        // Replace with actual login logic (e.g., redirect to dashboard)
+        // For demonstration, closing the popup
+        closeLoginPopup();
+    } else {
+        alert('Invalid OTP. Please try again.');
+    }
+}
+
+// Function to notify backend about login
+function notifyLogin(9326487146) {
+    // Simulated function for demonstration
+    console.log('User logged in with mobile number:', mobileNumber);
+
+    // Replace with actual code to notify backend (e.g., AJAX request)
+    // Example using fetch API:
+    /*
+    fetch('/api/notify-login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ mobileNumber: mobileNumber })
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Notification sent successfully');
+        } else {
+            console.error('Failed to send notification');
+        }
+    })
+    .catch(error => {
+        console.error('Error sending notification:', error);
+    });
+    */
+}
